@@ -6,7 +6,8 @@
 
     <div style="-webkit-box-shadow: 0px 10px 39px 10px rgba(62, 66, 66, 0.22);
     -moz-box-shadow: 0px 10px 39px 10px rgba(62, 66, 66, 0.22);
-    box-shadow: 0px 10px 39px 10px rgba(62, 66, 66, 0.22);border-radius: 5px" id="event-create-container" class="col-md-6 offset-md-3">
+    box-shadow: 0px 10px 39px 10px rgba(62, 66, 66, 0.22);border-radius: 5px"
+        id="event-create-container" class="col-md-6 offset-md-3">
         <h1>Crie seu evento</h1>
         <form action="/events" method="POST" enctype="multipart/form-data">
             <!-- Diretiva @csrf que permite o envio do formulario no LARAVEL -->
@@ -40,20 +41,20 @@
             </div>
             <div class="form-group">
                 <label for="description">Adicione itens de Infraestrutura: </label>
-                <div class="form-group" >
-                    <input type="checkbox" name="items[]" value="Cadeiras" > Cadeiras
+                <div class="form-group">
+                    <input type="checkbox" name="items[]" value="Cadeiras"> Cadeiras
                 </div>
-                <div class="form-group" >
-                    <input type="checkbox" name="items[]" value="Palco" > Palco
+                <div class="form-group">
+                    <input type="checkbox" name="items[]" value="Palco"> Palco
                 </div>
-                <div class="form-group" >
-                    <input type="checkbox" name="items[]" value="Cerveja grátis" > Cerveja grátis
+                <div class="form-group">
+                    <input type="checkbox" name="items[]" value="Cerveja grátis"> Cerveja grátis
                 </div>
-                <div class="form-group" >
-                    <input type="checkbox" name="items[]" value="Open Food" > Open Food
+                <div class="form-group">
+                    <input type="checkbox" name="items[]" value="Open Food"> Open Food
                 </div>
-                <div class="form-group" >
-                    <input type="checkbox" name="items[]" value="Brindes" > Brindes
+                <div class="form-group">
+                    <input type="checkbox" name="items[]" value="Brindes"> Brindes
                 </div>
             </div>
             <input type="submit" class="btn btn-outline-primary" value="Criar evento">

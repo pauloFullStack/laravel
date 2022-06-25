@@ -33,34 +33,42 @@ class EventController extends Controller
 
     public function create()
     {
-        return view('events.create');
+        return view('events.create', ['data' => ['0' => 'vazio']]);
     }
 
     public function store(Request $request)
     {
-        $event = new Event;
-        $event->title = $request->title;
-        $event->date = $request->date;
-        $event->city = $request->city;
-        $event->private = $request->private;
-        $event->description = $request->description;
-        $event->items = $request->items;
 
-        //Image upload
-        if ($request->hasFile('image') && $request->file('image')->isValid()) {
+        if (!empty($request->title) && !empty($request->date) && !empty($request->city) && ($request->private == 0 || $request->private == 1)  && !empty($request->description) && !empty($request->items[0])) {
 
-            $requestImage = $request->image;
-            $extension = $requestImage->extension();
-            $imageName = md5($requestImage->getClientOriginalName() . strtotime('now')) . '.' . $extension;
-            $requestImage->move(public_path('img/events'), $imageName);
-            $event->image = $imageName;
+
+
+            $event = new Event;
+            $event->title = $request->title;
+            $event->date = $request->date;
+            $event->city = $request->city;
+            $event->private = $request->private;
+            $event->description = $request->description;
+            $event->items = $request->items;
+
+            //Image upload
+            if ($request->hasFile('image') && $request->file('image')->isValid()) {
+
+                $requestImage = $request->image;
+                $extension = $requestImage->extension();
+                $imageName = md5($requestImage->getClientOriginalName() . strtotime('now')) . '.' . $extension;
+                $requestImage->move(public_path('img/events'), $imageName);
+                $event->image = $imageName;
+            }
+
+            $user = auth()->user();
+            $event->user_id = $user->id;
+
+            $event->save();
+            return redirect('/')->with('msg', 'Evento criado com sucesso!');
+        } else {
+            return redirect('/events/create')->with('msg_error', 'Preencha todos os campos!');
         }
-
-        $user = auth()->user();
-        $event->user_id = $user->id;
-
-        $event->save();
-        return redirect('/')->with('msg', 'Evento criado com sucesso!');
     }
 
     public function show($id)

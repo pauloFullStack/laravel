@@ -41,6 +41,16 @@ header {
     padding: 10px;
 }
 
+.msg_error {
+    background-color: #DA6C6C;
+    color: #fff;
+    border: 1px solid #c3e6cb;
+    width: 100%;
+    margin-bottom: 0;
+    text-align: center;
+    padding: 10px;
+}
+
 #event-create-container {
     padding: 30px;
 }

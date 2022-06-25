@@ -15,7 +15,9 @@
     <link rel="stylesheet" href="/css/style.css">
 
     <!-- Icones  -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css"
+        integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
 
     <!-- Muda o conteudo da titulo dinamicamente -->
     <title>@yield('title')</title>
@@ -45,9 +47,10 @@
                                 <a class="nav-link active" href="/dashboard">Meus eventos</a>
                             </li>
                             <li class="nav-item">
-                                <form action="/logout" method="POST" >
+                                <form action="/logout" method="POST">
                                     @csrf
-                                    <a href="/logout" class="nav-link" onclick="event.preventDefault();this.closest('form').submit();" >Sair</a>
+                                    <a href="/logout" class="nav-link"
+                                        onclick="event.preventDefault();this.closest('form').submit();">Sair</a>
                                 </form>
                             </li>
                         @endauth
@@ -64,7 +67,7 @@
             </div>
         </nav>
     </header>
-    
+
     <div id="dashboard" class="overlay">
         <i style="color: #8C52FF;" class="fa fa-spinner fa-spin fa-3x fa-fw"></i>
     </div>
@@ -74,6 +77,10 @@
         <div class="row">
             @if (session('msg'))
                 <p class="msg">{{ session('msg') }}</p>
+            @else
+                @if (session('msg_error'))
+                    <p class="msg_error">{{ session('msg_error') }}</p>
+                @endif
             @endif
             @yield('content')
         </div>
