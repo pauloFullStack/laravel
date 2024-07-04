@@ -1,0 +1,53 @@
+version: "3.7"
+services:
+  app:
+    build:
+      args:
+        user: sammy
+        uid: 1000
+      context: ./
+      dockerfile: Dockerfile
+    image: php-v7.4
+    environment:
+      - APP_DIR=${APP_DIR}
+    container_name: phpgold-app
+    restart: unless-stopped
+    working_dir: ${APP_DIR}
+    volumes:
+      - ./:${APP_DIR}
+    env_file:
+      - .env  
+    networks:
+      - phpgold
+
+  db:
+    image: mysql:5.7
+    container_name: phpgold-db
+    restart: unless-stopped
+    environment:
+      MYSQL_DATABASE: ${DB_DATABASE}
+      MYSQL_ROOT_PASSWORD: ${DB_PASSWORD}
+      MYSQL_PASSWORD: ${DB_PASSWORD}
+      MYSQL_USER: ${DB_USERNAME}
+      SERVICE_TAGS: dev
+      SERVICE_NAME: mysql
+    volumes:
+      - ./docker-compose/mysql/data:/var/lib/mysql
+    networks:
+      - phpgold
+
+  nginx:
+    image: nginx:alpine
+    container_name: phpgold-nginx
+    restart: unless-stopped
+    ports:
+      - 8000:80
+    volumes:
+      - ./:/var/www
+      - ./docker-compose/nginx:/etc/nginx/conf.d/
+    networks:
+      - phpgold
+
+networks:
+  phpgold:
+    driver: bridge
